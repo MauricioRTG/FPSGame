@@ -4,22 +4,20 @@ using UnityEngine;
 
 public class RoundManager : MonoBehaviour
 {
-    [SerializeField] GameObject[] spawnerObjects;
+    [SerializeField] WaveManager waveManager;
+    [SerializeField] int maxWavesAmount = 3;
     // Start is called before the first frame update
     void Start()
     {
-        spawnerObjects = GameObject.FindGameObjectsWithTag("EnemySpawner");
-        StartRound();
+        waveManager = FindObjectOfType<WaveManager>();
+        if(waveManager != null)
+        {
+            StartRound();
+        }
     }
 
     private void StartRound()
     {
-        foreach (GameObject spawnerObject in spawnerObjects)
-        {
-            if(spawnerObject.TryGetComponent<EnemySpawner>(out var spawner))
-            {
-                spawner.ToggleSpawning();
-            }
-        }
+        waveManager.StartWave();
     }
 }

@@ -10,6 +10,11 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] bool isSpawning = false;
     private Coroutine spawnCoroutine;
 
+    [SerializeField] public static readonly int enemiesSpawnLimit = 3;
+    [SerializeField] int enemiesSpawned;
+
+    private const int Zero = 0;
+
     // Update is called once per frame
     void Update()
     {
@@ -21,9 +26,10 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator SpawnEnemyRoutine()
     {
-        while (isSpawning)
+        while (isSpawning && enemiesSpawned < enemiesSpawnLimit)
         {
             Instantiate(enemy, transform.position, transform.rotation);
+            enemiesSpawned++;
             yield return new WaitForSeconds(spawnInterval);
         }
     }
@@ -40,6 +46,7 @@ public class EnemySpawner : MonoBehaviour
         {
             StopCoroutine(spawnCoroutine);
             spawnCoroutine = null;
+            enemiesSpawned = Zero;
         }
     }
 }

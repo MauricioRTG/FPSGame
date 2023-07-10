@@ -8,9 +8,18 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int currentHealth;
     [SerializeField] ScoreManager score;
     [SerializeField] int enemyPoints = 50;
+    [SerializeField] WaveManager waveManager;
+
     // Start is called before the first frame update
     void Start()
     {
+
+        waveManager = FindObjectOfType<WaveManager>();
+        if (waveManager == null)
+        {
+            Debug.LogError("Enemy : WaveManager component not found");
+        }
+
         score = FindObjectOfType<ScoreManager>();
         if (score == null)
         {
@@ -33,6 +42,7 @@ public class Enemy : MonoBehaviour
     public void Die()
     {
         score.AddPoints(enemyPoints);
+        waveManager.IncreaseDestroyedEnemiesCount();
         Destroy(gameObject);
     }
 }
