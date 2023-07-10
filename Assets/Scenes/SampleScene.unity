@@ -4548,6 +4548,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveManager: {fileID: 0}
   maxWavesAmount: 3
+  waveCount: 0
+  waveInterval: 10
 --- !u!4 &1097512926
 Transform:
   m_ObjectHideFlags: 0
@@ -7278,6 +7280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnerObjects: []
+  roundManager: {fileID: 0}
   destroyedEnemiesCount: 0
   enemiesDestroyedLimit: 0
 --- !u!4 &1875555998

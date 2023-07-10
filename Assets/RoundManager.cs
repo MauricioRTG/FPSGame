@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class RoundManager : MonoBehaviour
 {
     [SerializeField] WaveManager waveManager;
     [SerializeField] int maxWavesAmount = 3;
+    [SerializeField] int waveCount;
+    [SerializeField] float waveInterval = 10f;
+    [SerializeField] public int currentRound;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +22,21 @@ public class RoundManager : MonoBehaviour
 
     private void StartRound()
     {
-        waveManager.StartWave();
+        currentRound++;
+        StartCoroutine(StartNextWave());
+    }
+
+    public IEnumerator StartNextWave()
+    {
+        yield return new WaitForSeconds(waveInterval);
+        if (waveCount < maxWavesAmount)
+        {
+            waveCount++;
+            waveManager.StartWave();
+        }
+        else
+        {
+            //TODO: Finish round (opens portal)
+        }
     }
 }

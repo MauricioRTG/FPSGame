@@ -5,6 +5,7 @@ using UnityEngine;
 public class WaveManager : MonoBehaviour
 {
     [SerializeField] GameObject[] spawnerObjects;
+    [SerializeField] RoundManager roundManager;
     [SerializeField] int destroyedEnemiesCount;
     [SerializeField] int enemiesDestroyedLimit;
 
@@ -12,6 +13,7 @@ public class WaveManager : MonoBehaviour
     void Start()
     {
         spawnerObjects = GameObject.FindGameObjectsWithTag("EnemySpawner");
+        roundManager = FindObjectOfType<RoundManager>();
         enemiesDestroyedLimit = spawnerObjects.Length * EnemySpawner.enemiesSpawnLimit;
     }
 
@@ -44,6 +46,10 @@ public class WaveManager : MonoBehaviour
             }
         }
         ResetDestroyedEnemiesCount();
+
+        StopCoroutine(roundManager.StartNextWave());
+
+        StartCoroutine(roundManager.StartNextWave());
     }
 
     public void IncreaseDestroyedEnemiesCount()
