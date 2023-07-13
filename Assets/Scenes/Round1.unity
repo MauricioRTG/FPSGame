@@ -588,6 +588,8 @@ GameObject:
   - component: {fileID: 109075012}
   - component: {fileID: 109075011}
   - component: {fileID: 109075010}
+  - component: {fileID: 109075017}
+  - component: {fileID: 109075016}
   - component: {fileID: 109075015}
   m_Layer: 6
   m_Name: Player
@@ -731,6 +733,36 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &109075016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109075009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d92f1ce8510030245a41781af58b31f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetLayerMask: Enemy
+  damageAmount: 25
+--- !u!114 &109075017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109075009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77e1e9ba89fd094438f3e4a2088c38f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  minHealth: 0
+  health: 0
+  healthImage: {fileID: 1012939177}
 --- !u!1001 &110715870
 PrefabInstance:
   m_ObjectHideFlags: 0
