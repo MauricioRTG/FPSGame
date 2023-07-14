@@ -13,6 +13,12 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] Rigidbody rigidBody;
     [SerializeField] CapsuleCollider col;
     
+
+    [SerializeField] Player player;
+    [SerializeField] int playerStamina;
+    [SerializeField] int staminaDecreaseAmount = 25;
+    [SerializeField] int staminaIncreaseAmount = 25;
+    [SerializeField] private bool isSprinting = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,12 +27,26 @@ public class CharacterMovement : MonoBehaviour
         rigidBody = GetComponent<Rigidbody>();
         col = GetComponent<CapsuleCollider>();
         speed = defaultSpeed;
+
+        player = GetComponent<Player>();
+        playerStamina = player.Stamina;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Update player's stammina 
+        playerStamina = player.Stamina;
+
+        //Sprint
         Sprint();
+
+        //Increase player stamina, only when is not sprinting
+        if(!isSprinting)
+        {
+            player.IncreaseStamina(staminaIncreaseAmount);
+        }
+        
 
         //Move
         float Horizontal = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
@@ -47,17 +67,25 @@ public class CharacterMovement : MonoBehaviour
         return Physics.Raycast(transform.position, Vector3.down, col.bounds.extents.y + 0.1f);
     }
 
-    //Shift key is held down, increase player speed
-    //Shift key is released return to default speed
     private void Sprint()
     {
-
+        //Shift key is held down, increase player speed only if the player's stamina is not 0
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            speed = defaultSpeed * accelerationFactor;
+            isSprinting = true;
+            if (playerStamina > 0)
+            {
+                speed = defaultSpeed * accelerationFactor;
+                player.DecreseStamina(staminaDecreaseAmount);
+            }
+            else
+            {
+                speed = defaultSpeed;
+            }
         }
-        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        else if (Input.GetKeyUp(KeyCode.LeftShift)) //Shift key is released return to default speed
         {
+            isSprinting = false;
             speed = defaultSpeed;
         }
     }
