@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] int maxHealth = 100;
     [SerializeField] int minHealth = 0;
     [SerializeField] int health;
+    //UI
     [SerializeField] Image healthImage;
     private RectTransform healthImageRectTransform;
 
@@ -18,6 +19,7 @@ public class Player : MonoBehaviour
     {
         get { return stamina; }
     }
+    //UI
     [SerializeField] Image staminaImage;
     private RectTransform staminaImageRectTransform;
 

@@ -1,16 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class RoundManager : MonoBehaviour
 {
     [SerializeField] WaveManager waveManager;
-    [SerializeField] int maxWavesAmount = 3;
-    [SerializeField] int waveCount;
+    [SerializeField] private int maxWavesAmount = 3;
+    [SerializeField] private int waveCount;
+    public int MaxWavesAmount => maxWavesAmount;
+    public int WaveCount => waveCount;
     [SerializeField] float waveInterval = 10f;
     [SerializeField] public int currentRound;
+
+    //UI
+    [SerializeField] TextMeshProUGUI roundNumberText;
+    [SerializeField] GameObject[] waveIconGameObjects;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +27,21 @@ public class RoundManager : MonoBehaviour
         if(waveManager != null)
         {
             StartRound();
+        }
+        //UI 
+        waveIconGameObjects = GameObject.FindGameObjectsWithTag("WaveIcon");
+    }
+
+    private void Update()
+    {
+        //Update current round UI
+        roundNumberText.text = currentRound.ToString();
+
+        //Update current wave UI
+        for(int i = 0; i < waveCount; i++)
+        {
+            Image waveIconImage = waveIconGameObjects[i].GetComponent<Image>();
+            waveIconImage.color = Color.blue;
         }
     }
 

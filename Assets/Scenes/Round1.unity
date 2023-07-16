@@ -1320,7 +1320,7 @@ GameObject:
   - component: {fileID: 217866162}
   m_Layer: 5
   m_Name: WaveIcon2
-  m_TagString: Untagged
+  m_TagString: WaveIcon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4235,7 +4235,7 @@ GameObject:
   - component: {fileID: 907630130}
   - component: {fileID: 907630129}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: AmmunitionTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5114,6 +5114,8 @@ MonoBehaviour:
   waveCount: 0
   waveInterval: 10
   currentRound: 0
+  roundNumberText: {fileID: 1650653905}
+  waveIconGameObjects: []
 --- !u!4 &1097512926
 Transform:
   m_ObjectHideFlags: 0
@@ -5514,7 +5516,7 @@ GameObject:
   - component: {fileID: 1170612675}
   m_Layer: 5
   m_Name: WaveIcon1
-  m_TagString: Untagged
+  m_TagString: WaveIcon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5552,7 +5554,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.45660377, g: 0.6793145, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7301,7 +7303,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8363,6 +8365,8 @@ MonoBehaviour:
   roundManager: {fileID: 0}
   destroyedEnemiesCount: 0
   enemiesDestroyedLimit: 0
+  enemiesRemaining: 0
+  enemiesRemainingText: {fileID: 2028869354}
 --- !u!4 &1875555998
 Transform:
   m_ObjectHideFlags: 0
@@ -9220,7 +9224,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Enemies remaining: 6/20'
+  m_text: 'Enemies remaining: 0/20'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9454,7 +9458,7 @@ GameObject:
   - component: {fileID: 2111630397}
   m_Layer: 5
   m_Name: WaveIcon3
-  m_TagString: Untagged
+  m_TagString: WaveIcon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

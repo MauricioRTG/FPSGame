@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
@@ -8,6 +9,10 @@ public class WaveManager : MonoBehaviour
     [SerializeField] RoundManager roundManager;
     [SerializeField] int destroyedEnemiesCount;
     [SerializeField] int enemiesDestroyedLimit;
+    [SerializeField] int enemiesRemaining;
+
+    //UI
+    [SerializeField] TextMeshProUGUI enemiesRemainingText;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +24,9 @@ public class WaveManager : MonoBehaviour
 
     void Update()
     {
+
+        UpdateEnemiesRemainingUI();
+        
         if(destroyedEnemiesCount == enemiesDestroyedLimit)
         {
             EndWave();
@@ -60,5 +68,12 @@ public class WaveManager : MonoBehaviour
     public void ResetDestroyedEnemiesCount()
     {
         destroyedEnemiesCount = 0;
+    }
+
+    private void UpdateEnemiesRemainingUI()
+    {
+        //Update enemies remaining UI
+        enemiesRemaining = enemiesDestroyedLimit - destroyedEnemiesCount;
+        enemiesRemainingText.text = "Enemies Remaining: " + enemiesRemaining.ToString() + "/" + enemiesDestroyedLimit.ToString();
     }
 }
