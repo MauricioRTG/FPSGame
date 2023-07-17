@@ -1018,6 +1018,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 4735234441576896913, guid: 29a6c96b8df583b438034489ed0fa8aa, type: 3}
+  maxprojectileAmount: 30
+  minProjectileAmount: 0
+  projectileAmount: 0
+  remainingProjectileAmountInMagazine: 0
+  projectileUIText: {fileID: 907630129}
 --- !u!1001 &145740218
 PrefabInstance:
   m_ObjectHideFlags: 0
