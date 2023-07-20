@@ -43,6 +43,31 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void IncreaseHealth(int amount)
+    {
+        //Increase stamina but if it increases more that maxhealth, set health to maxhealth
+        health += amount;
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
+        IncreaseUIHealth(amount);
+    }
+
+    private void IncreaseUIHealth(int amount)
+    {
+        float newHeight = healthImageRectTransform.sizeDelta.y + amount;
+        if (newHeight > maxHealth)
+        {
+            newHeight = maxHealth;
+        }
+
+        if (healthImageRectTransform != null)
+        {
+           healthImageRectTransform.sizeDelta = new Vector2(healthImageRectTransform.sizeDelta.x, newHeight);
+        }
+    }
+
     private void Die()
     {
         RoundManager.RestartRound();
