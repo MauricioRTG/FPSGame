@@ -20,6 +20,9 @@ public class RoundManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI roundNumberText;
     [SerializeField] GameObject[] waveIconGameObjects;
 
+    //Portal
+    [SerializeField] Portal portal;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +31,9 @@ public class RoundManager : MonoBehaviour
         {
             StartRound();
         }
+
+        portal = FindObjectOfType<Portal>();
+
         //UI 
         waveIconGameObjects = GameObject.FindGameObjectsWithTag("WaveIcon");
     }
@@ -61,7 +67,7 @@ public class RoundManager : MonoBehaviour
         }
         else
         {
-            //TODO: Finish round (opens portal)
+            portal.InstantiatePortal();
         }
     }
 
