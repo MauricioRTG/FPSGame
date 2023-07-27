@@ -67,7 +67,7 @@ public class RoundManager : MonoBehaviour
         }
         else
         {
-            portal.InstantiatePortal();
+            //portal.InstantiatePortal();
         }
     }
 
