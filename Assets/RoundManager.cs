@@ -67,7 +67,8 @@ public class RoundManager : MonoBehaviour
         }
         else
         {
-            //portal.InstantiatePortal();
+            //Waves ended
+            portal.ActivatePortal();
         }
     }
 
