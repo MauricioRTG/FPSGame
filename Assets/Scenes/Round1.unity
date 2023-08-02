@@ -774,6 +774,12 @@ MonoBehaviour:
   minStamina: 0
   stamina: 0
   staminaImage: {fileID: 1461718035}
+  maxprojectileAmount: 30
+  minProjectileAmount: 0
+  projectileAmount: 0
+  remainingProjectileAmountInMagazine: 0
+  activeProjectile: {fileID: 0}
+  projectileUIText: {fileID: 907630129}
 --- !u!114 &109075018
 MonoBehaviour:
   m_ObjectHideFlags: 0
