@@ -120,7 +120,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4414147651695107825, guid: 696b58ef645e2d94890906c86240db01, type: 3}
       propertyPath: m_Name
-      value: Shutgun Variant
+      value: Shotgun Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4414147651695107825, guid: 696b58ef645e2d94890906c86240db01, type: 3}
+      propertyPath: m_TagString
+      value: Shotgun
       objectReference: {fileID: 0}
     - target: {fileID: 7021134108765800922, guid: 696b58ef645e2d94890906c86240db01, type: 3}
       propertyPath: m_IsActive

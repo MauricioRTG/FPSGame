@@ -7,17 +7,17 @@ using UnityEngine;
 public class ActiveProjectile : MonoBehaviour
 {
     public GameObject projectile;
-    [SerializeField] Player player;
+    [SerializeField] WeaponAmmunition weaponAmmunition;
     
     void Start()
     {
-        player = FindObjectOfType<Player>();
+        weaponAmmunition = FindObjectOfType<WeaponAmmunition>();
     }
 
     public void InstantiateProjectile()
     {
         var clone = Instantiate(projectile, gameObject.transform.position, gameObject.transform.rotation);
-        player.projectileAmount--;
+        weaponAmmunition.ammunitionAmount--;
         //Destroy after 2 seconds to stop clutter.
         Destroy(clone, 5.0f);
     }

@@ -11,6 +11,8 @@ public class SwitchWeapon : MonoBehaviour
     [SerializeField] GameObject newWeapon;
     [SerializeField] GameObject mainCamara;
 
+    public GameObject CurrentWeapon { get => currentWeapon; }
+
     void Start()
     {
         currentWeapon = weapons[currentWeaponIndex];
@@ -27,7 +29,7 @@ public class SwitchWeapon : MonoBehaviour
 
     private void SwitchToNextWeapon()
     {
-        Destroy(newWeapon);
+        Destroy(newWeapon);//TODO: Remove this so it is persistent
         //Go to the next index relative to the current index, while staying in the weapons array bounds
         nextWeaponIndex = (currentWeaponIndex + 1) % weapons.Length;
         currentWeapon = weapons[nextWeaponIndex];
@@ -37,6 +39,8 @@ public class SwitchWeapon : MonoBehaviour
 
     private void InstantiateWeapon(GameObject weapon)
     {
+        //TODO: Array pushing new gameobject, maybe it can be a diccionary storing by string
+
         newWeapon = Instantiate(weapon, transform.position, transform.rotation, transform);
         //Position relative to the parent transform, moving the gameOject by an offset that it is provided in the weapon prefab transform position.
         newWeapon.transform.localPosition = weapon.transform.position;

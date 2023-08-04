@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -27,13 +28,13 @@ public class Player : MonoBehaviour
     private RectTransform staminaImageRectTransform;
 
     //Ammunition
-    [SerializeField] int maxprojectileAmount = 30;
-    [SerializeField] int minProjectileAmount;
     [SerializeField] public int projectileAmount;
     [SerializeField] int remainingProjectileAmountInMagazine;
     [SerializeField] ActiveProjectile activeProjectile;
+    [SerializeField] WeaponAmmunition weaponAmmunition;
     //Ammunition UI
     [SerializeField] TextMeshProUGUI projectileUIText;
+
 
     // Start is called before the first frame update
     void Start()
@@ -43,18 +44,23 @@ public class Player : MonoBehaviour
 
         stamina = maxStamina;
         staminaImageRectTransform = staminaImage.GetComponent<RectTransform>();
-
-        projectileAmount = maxprojectileAmount;
-        remainingProjectileAmountInMagazine = maxprojectileAmount;
-        UpdateProjectileUIAmount();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (weaponAmmunition == null)
+        {
+            weaponAmmunition = FindObjectOfType<WeaponAmmunition>(); //TODO: Based in the current weapon that the player has
+        }
+
+        projectileAmount = weaponAmmunition.ammunitionAmount;
+        remainingProjectileAmountInMagazine = weaponAmmunition.remainingAmmunitionAmountInMagazine;
+        UpdateProjectileUIAmount();
+
         if (activeProjectile == null)
         {
-            activeProjectile = FindObjectOfType<ActiveProjectile>();
+            activeProjectile = FindObjectOfType<ActiveProjectile>(); //TODO: Based in the current weapon that the player has
         }
         
         if (Input.GetButtonDown("Fire1"))
@@ -68,7 +74,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Reload();
+            weaponAmmunition.Reload();
             UpdateProjectileUIAmount();
         }
     }
@@ -166,14 +172,29 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Reload()
+    /*private void Reload()
     {
         projectileAmount = remainingProjectileAmountInMagazine;
         remainingProjectileAmountInMagazine = 0;
-    }
+    }*/
 
     private void UpdateProjectileUIAmount()
     {
+        /*String currentWeaponTag = switchWeapon.CurrentWeapon.tag;
+
+        if(currentWeaponTag != null)
+        {
+            switch (currentWeaponTag)
+            {
+                case "Pistol":
+                    projectileUIText.text = projectileAmount.ToString() + "/" + remainingProjectileAmountInMagazine.ToString();
+                    break;
+                case "Shotgun":
+                    projectileUIText.text = projectileAmount.ToString() + "/" + remainingProjectileAmountInMagazine.ToString();
+                    break;
+            }
+        }*/
         projectileUIText.text = projectileAmount.ToString() + "/" + remainingProjectileAmountInMagazine.ToString();
     }
+
 }
