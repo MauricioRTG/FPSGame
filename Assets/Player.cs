@@ -35,6 +35,9 @@ public class Player : MonoBehaviour
     //Ammunition UI
     [SerializeField] TextMeshProUGUI projectileUIText;
 
+    //Weapon
+    //[SerializeField] SwitchWeapon switchWeapon;
+
 
     // Start is called before the first frame update
     void Start()
@@ -44,25 +47,32 @@ public class Player : MonoBehaviour
 
         stamina = maxStamina;
         staminaImageRectTransform = staminaImage.GetComponent<RectTransform>();
+
+        //switchWeapon = FindObjectOfType<SwitchWeapon>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Get current weapon ammunition script
         if (weaponAmmunition == null)
         {
             weaponAmmunition = FindObjectOfType<WeaponAmmunition>(); //TODO: Based in the current weapon that the player has
         }
 
+        //Get the ammunition and remaining ammunition amount in magazine from the current weapon
         projectileAmount = weaponAmmunition.ammunitionAmount;
         remainingProjectileAmountInMagazine = weaponAmmunition.remainingAmmunitionAmountInMagazine;
+        //Update ammunition UI with the current weapon ammunition
         UpdateProjectileUIAmount();
 
+        //Get bullet or projectile instantiation script component from the current weapon GameObject
         if (activeProjectile == null)
         {
             activeProjectile = FindObjectOfType<ActiveProjectile>(); //TODO: Based in the current weapon that the player has
         }
         
+        //Instantiate bullets when firing weapon
         if (Input.GetButtonDown("Fire1"))
         {
             if (projectileAmount > 0)
@@ -72,6 +82,7 @@ public class Player : MonoBehaviour
             }
         }
 
+        //Reload
         if (Input.GetKeyDown(KeyCode.R))
         {
             weaponAmmunition.Reload();
@@ -131,6 +142,7 @@ public class Player : MonoBehaviour
     public void DecreseStamina(int amount)
     {
         stamina -= amount;
+        //Caps stamina value so it doesn't decreases more than the minStamina value
         if (stamina < minStamina)
         {
             stamina = minStamina;
@@ -196,5 +208,23 @@ public class Player : MonoBehaviour
         }*/
         projectileUIText.text = projectileAmount.ToString() + "/" + remainingProjectileAmountInMagazine.ToString();
     }
+
+    /*private void GetCurrentWeaponInScene()
+    {
+        String currentWeaponTag = switchWeapon.CurrentWeapon.tag;
+
+        if(currentWeaponTag != null)
+        {
+            switch (currentWeaponTag)
+            {
+                case "Pistol":
+                    projectileUIText.text = projectileAmount.ToString() + "/" + remainingProjectileAmountInMagazine.ToString();
+                    break;
+                case "Shotgun":
+                    projectileUIText.text = projectileAmount.ToString() + "/" + remainingProjectileAmountInMagazine.ToString();
+                    break;
+            }
+        }
+    }*/
 
 }
