@@ -774,12 +774,13 @@ MonoBehaviour:
   minStamina: 0
   stamina: 0
   staminaImage: {fileID: 1461718035}
-  maxprojectileAmount: 30
-  minProjectileAmount: 0
   projectileAmount: 0
   remainingProjectileAmountInMagazine: 0
-  activeProjectile: {fileID: 0}
+  weaponAmmunition: {fileID: 0}
   projectileUIText: {fileID: 907630129}
+  switchWeapon: {fileID: 0}
+  currentWeapon: {fileID: 0}
+  bulletInstantiator: {fileID: 0}
 --- !u!114 &109075018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3582,6 +3583,7 @@ GameObject:
   m_Component:
   - component: {fileID: 798783690}
   - component: {fileID: 798783691}
+  - component: {fileID: 798783692}
   m_Layer: 6
   m_Name: Weapon
   m_TagString: Untagged
@@ -3622,8 +3624,20 @@ MonoBehaviour:
   nextWeaponIndex: 0
   currentWeaponIndex: 0
   currentWeapon: {fileID: 0}
-  newWeapon: {fileID: 0}
-  mainCamara: {fileID: 963194225}
+  weaponsInScene: []
+--- !u!114 &798783692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798783689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c9f1ec8e30d766499288228b6caace7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentWeapon: {fileID: 0}
 --- !u!4 &802409193 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 674abf7991cb1834295e5ef26fd7327d, type: 3}

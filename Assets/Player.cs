@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     //Ammunition
     [SerializeField] public int projectileAmount;
     [SerializeField] int remainingProjectileAmountInMagazine;
-    [SerializeField] ActiveProjectile activeProjectile;
+    //[SerializeField] ActiveProjectile activeProjectile;
     [SerializeField] WeaponAmmunition weaponAmmunition;
     //Ammunition UI
     [SerializeField] TextMeshProUGUI projectileUIText;
@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
     //Weapon
     [SerializeField] SwitchWeapon switchWeapon;
     [SerializeField] GameObject currentWeapon;
+    [SerializeField] BulletInstantiator bulletInstantiator;
 
 
     // Start is called before the first frame update
@@ -50,6 +51,8 @@ public class Player : MonoBehaviour
         staminaImageRectTransform = staminaImage.GetComponent<RectTransform>();
 
         switchWeapon = FindObjectOfType<SwitchWeapon>();
+
+        bulletInstantiator = FindObjectOfType<BulletInstantiator>();
     }
 
     // Update is called once per frame
@@ -57,11 +60,11 @@ public class Player : MonoBehaviour
     {
         currentWeapon = FindCurrentActiveWeaponInScene();
         
-        //Get current weapon ammunition and activeProjectie scripts from current active weapon
+        //Get current weapon ammunition and corresponging Weapon scripts from current active weapon
         if (currentWeapon != null)
         {
             weaponAmmunition = currentWeapon.GetComponent<WeaponAmmunition>();
-            activeProjectile = currentWeapon.GetComponent<ActiveProjectile>();
+            bulletInstantiator.currentWeapon = currentWeapon.GetComponent<Weapon>();
         }
 
         //Get the ammunition and remaining ammunition amount in magazine from the current weapon
@@ -75,7 +78,7 @@ public class Player : MonoBehaviour
         {
             if (projectileAmount > 0)
             {
-                activeProjectile.InstantiateProjectile();
+                bulletInstantiator.currentWeapon.InstantiateBullets();
                 UpdateProjectileUIAmount();
             }
         }
