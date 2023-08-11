@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class SwitchWeapon : MonoBehaviour
 {
-    [SerializeField] GameObject[] weapons;
     [SerializeField] int nextWeaponIndex;
     [SerializeField] int currentWeaponIndex;
     [SerializeField] GameObject currentWeapon;
@@ -15,9 +14,7 @@ public class SwitchWeapon : MonoBehaviour
 
     void Start()
     {
-        //Instantiate first weapon that will appear in scene
-        currentWeapon = weapons[currentWeaponIndex];
-        InstantiateWeapon(currentWeapon);
+        currentWeapon = weaponsInScene[currentWeaponIndex];
     }
 
     void Update()
@@ -31,32 +28,16 @@ public class SwitchWeapon : MonoBehaviour
     private void SwitchToNextWeapon()
     {
         //Go to the next index relative to the current weapon index, while staying in the weapons roster array bounds
-        nextWeaponIndex = (currentWeaponIndex + 1) % weapons.Length;
+        nextWeaponIndex = (currentWeaponIndex + 1) % weaponsInScene.Count;
 
-        //Change to the current weapon that is going to be instantiated to the next weapon in the weapon roster
-        currentWeapon = weapons[nextWeaponIndex];
+        //Update current weapon
+        currentWeapon = weaponsInScene[nextWeaponIndex];
 
-        /*
-         * Checks if the weapons in scene have the same size as the weapons roster:
-         * If that is no true then instantiate the weapon and add it to the weapons in scene list
-         * If the size is the same, then only hide previous weapon and active the next weapon
-        */
-
-        if (weaponsInScene.Count == weapons.Length)
-        {
-            //Hide previous weapon
-            weaponsInScene[currentWeaponIndex].SetActive(false);
-            //Active next weapon
-            weaponsInScene[nextWeaponIndex].SetActive(true);
-        }
-        else
-        {
-            //Hide previous weapon
-            weaponsInScene[currentWeaponIndex].SetActive(false);
-            //Instantiate the current weapon into the scene
-            InstantiateWeapon(currentWeapon);
-        }
-
+        //Hide current weapon
+        weaponsInScene[currentWeaponIndex].SetActive(false);
+        //Active next weapon
+        weaponsInScene[nextWeaponIndex].SetActive(true);
+  
         //Update the current weapon index
         currentWeaponIndex = nextWeaponIndex;
     }
