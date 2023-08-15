@@ -24,4 +24,15 @@ public class WeaponAmmunition : MonoBehaviour
         ammunitionAmount = remainingAmmunitionAmountInMagazine; //TODO: Add or complete ammunition not reasign
         remainingAmmunitionAmountInMagazine = 0;
     }
+
+    void Update()
+    {
+        /* This make sure that the ammunition left in the chamber is not less than 0
+         * In this way the player can shoot the especified bullets, for example 8 pellets of a shotgun, despite not having 8 bullets only 6 in the chamber
+        (this is a desired gameplay behavior to make the combat more fluid)*/
+        if(ammunitionAmount < 0)
+        {
+            ammunitionAmount = 0;
+        }
+    }
 }

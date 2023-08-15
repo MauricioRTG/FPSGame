@@ -30,7 +30,10 @@ public class Shotgun : Weapon
 
         for ( int i = 0; i < pellets; i++)
         {
+            //Enable line renderers
+            lineRenderers[i].enabled = true;
 
+            //Spread of shotgun pellets
             Vector3 spreadDirection = Quaternion.Euler(Random.Range(-spreadAngle, spreadAngle), Random.Range(-spreadAngle, spreadAngle), 0) * firePoint.transform.localPosition;
 
             
@@ -56,18 +59,19 @@ public class Shotgun : Weapon
 
             }
 
-            //Disable line renderer after short delay
-            //Invoke("DisableTrail", trailDuration);
-
+            //Decrease ammunition according to the number of pellets fired
+            weaponAmmunition.ammunitionAmount--;
         }
-
-        weaponAmmunition.ammunitionAmount--;
-        //Destroy after 2 seconds to stop clutter.
-
+        //Disable line renderer after short delay
+        Invoke("DisableTrail", trailDuration);
     }
 
     private void DisableTrail()
     {
+        foreach(LineRenderer lineRenderer in lineRenderers)
+        {
+            lineRenderer.enabled = false;
+        }
         //lineRenderer.enabled = false;
     }
 

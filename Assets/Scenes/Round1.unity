@@ -6938,6 +6938,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1785418320}
     - target: {fileID: 6857374564351645393, guid: e327b188146445d48b2aa54923e54318, type: 3}
+      propertyPath: spreadAngle
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6857374564351645393, guid: e327b188146445d48b2aa54923e54318, type: 3}
+      propertyPath: trailDuration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6857374564351645393, guid: e327b188146445d48b2aa54923e54318, type: 3}
       propertyPath: targetLayer.m_Bits
       value: 256
       objectReference: {fileID: 0}
