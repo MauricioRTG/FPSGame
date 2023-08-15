@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 4873911351744450292}
   - component: {fileID: 4483229565523308406}
   - component: {fileID: 2605815432327293436}
-  - component: {fileID: 4593555030217426825}
   - component: {fileID: 3722126386300679269}
   - component: {fileID: 126196328564045070}
+  - component: {fileID: 6272965283814115223}
+  - component: {fileID: 4611023888678970538}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
@@ -111,22 +112,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4593555030217426825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4702891407641451739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 619498d27193b5d4c889c1cf0f5a2822, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  col: {fileID: 0}
-  speed: 1
-  rotationSpeed: 1
-  player: {fileID: 0}
 --- !u!114 &3722126386300679269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,6 +144,42 @@ MonoBehaviour:
   targetLayerMask: Projectile
   damageAmount: 25
   pointsAmount: 1
+--- !u!114 &6272965283814115223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4702891407641451739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4600d2ddebe611340826ed6cc027bf3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  agent: {fileID: 0}
+--- !u!195 &4611023888678970538
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4702891407641451739}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &7083730187500817503
 PrefabInstance:
   m_ObjectHideFlags: 0
