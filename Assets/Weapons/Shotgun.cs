@@ -33,8 +33,9 @@ public class Shotgun : Weapon
             //Enable line renderers
             lineRenderers[i].enabled = true;
 
+            //For this to work the line renderer has to have its Allignment to TransformZ and Use World space enable
             //Spread of shotgun pellets
-            Vector3 spreadDirection = Quaternion.Euler(Random.Range(-spreadAngle, spreadAngle), Random.Range(-spreadAngle, spreadAngle), 0) * firePoint.transform.localPosition;
+            Vector3 spreadDirection = Quaternion.Euler(0, Random.Range(-spreadAngle, spreadAngle), 0) * firePoint.transform.forward;
 
             
             RaycastHit hit;
@@ -43,9 +44,9 @@ public class Shotgun : Weapon
                 //Update line renderer to show the trayectory conformed by two conected points in local space
                 lineRenderers[i].positionCount = 2;
                 //Set the first position of the line renderer to the fire point
-                lineRenderers[i].SetPosition(0, Vector3.zero);
+                lineRenderers[i].SetPosition(0, firePoint.position);
                 //Set the second position of the line renderer to the hit point
-                lineRenderers[i].SetPosition(1 , hit.point - firePoint.position);
+                lineRenderers[i].SetPosition(1 , hit.point);
                 //Apply damage and effects to the target
                 Debug.Log("Hit: " + hit.collider.gameObject.name);
 
@@ -54,7 +55,7 @@ public class Shotgun : Weapon
             {
                 //If there is not a hit, show maximum range with origin in the firePoint
                 lineRenderers[i].positionCount = 2;
-                lineRenderers[i].SetPosition(0, Vector3.zero);
+                lineRenderers[i].SetPosition(0, firePoint.position);
                 lineRenderers[i].SetPosition(1, spreadDirection * 100f);
 
             }
