@@ -15,6 +15,7 @@ public class Shotgun : Weapon
     [SerializeField] WeaponAmmunition weaponAmmunition;
     [SerializeField] float trailDuration = 0.1f;
     [SerializeField] Transform shotgunTrailsTransform;
+    [SerializeField] int damageAmount = 20;
 
 
     void Start()
@@ -47,8 +48,17 @@ public class Shotgun : Weapon
                 lineRenderers[i].SetPosition(0, firePoint.position);
                 //Set the second position of the line renderer to the hit point
                 lineRenderers[i].SetPosition(1 , hit.point);
+
                 //Apply damage and effects to the target
                 Debug.Log("Hit: " + hit.collider.gameObject.name);
+
+                //Checks if the hit gameObject has the Enemy script
+                Enemy enemy = hit.collider.GetComponent<Enemy>();
+
+                if(enemy != null)
+                {
+                    enemy.TakeDamage(damageAmount);
+                }
 
             }
             else

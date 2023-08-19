@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
     {
         currentHealth -= damageAmount;
 
-        if(currentHealth <= 0)
+        if(currentHealth == 0)
         {
             Die();
         }
