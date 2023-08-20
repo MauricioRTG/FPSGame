@@ -12,7 +12,7 @@ public class Shotgun : Weapon
     [SerializeField] float spreadAngle = 20.0f;
     [SerializeField] LayerMask targetLayer;
     [SerializeField] LineRenderer[] lineRenderers;  
-    [SerializeField] WeaponAmmunition weaponAmmunition;
+    [SerializeField] public WeaponAmmunition weaponAmmunition;
     [SerializeField] float trailDuration = 0.1f;
     [SerializeField] Transform shotgunTrailsTransform;
     [SerializeField] int damageAmount = 20;
@@ -84,6 +84,11 @@ public class Shotgun : Weapon
             lineRenderer.enabled = false;
         }
         //lineRenderer.enabled = false;
+    }
+
+    public void AddAmmunition(int ammunitionToAdd)
+    {
+        weaponAmmunition.AddAmmunition(ammunitionToAdd);
     }
 
     private void GetLineRenderersFromParentTransform()

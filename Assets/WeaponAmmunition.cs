@@ -7,22 +7,26 @@ public class WeaponAmmunition : MonoBehaviour
 
     [SerializeField] int maxAmmunitionAmount = 30;
     [SerializeField] int minAmmunitionAmount;
+    [SerializeField] int maxAmmunitionAmountStored = 50;
     [SerializeField] public int ammunitionAmount;
-    [SerializeField] public int remainingAmmunitionAmountInMagazine;
+    [SerializeField] public int remainingAmmunitionStored;
 
     public int MaxAmmunitionAmount { get => maxAmmunitionAmount; }
+    public int MaxAmmunitionAmountStored { get => maxAmmunitionAmountStored; }
+
+    public int AmmunitionAmount { get => ammunitionAmount; }
 
     // Start is called before the first frame update
     void Start()
     {
         ammunitionAmount = maxAmmunitionAmount;
-        remainingAmmunitionAmountInMagazine = maxAmmunitionAmount;
+        remainingAmmunitionStored = maxAmmunitionAmountStored;
     }
 
     public void Reload()
     {
-        ammunitionAmount = remainingAmmunitionAmountInMagazine; //TODO: Add or complete ammunition not reasign
-        remainingAmmunitionAmountInMagazine = 0;
+        ammunitionAmount = remainingAmmunitionStored; //TODO: Add or complete ammunition not reasign
+        remainingAmmunitionStored = 0;
     }
 
     void Update()
@@ -34,5 +38,10 @@ public class WeaponAmmunition : MonoBehaviour
         {
             ammunitionAmount = 0;
         }
+    }
+
+    public void AddAmmunition(int ammunitionToAdd)
+    {
+        remainingAmmunitionStored += ammunitionToAdd;
     }
 }

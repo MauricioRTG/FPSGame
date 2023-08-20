@@ -69,7 +69,7 @@ public class Player : MonoBehaviour
 
         //Get the ammunition and remaining ammunition amount in magazine from the current weapon
         projectileAmount = weaponAmmunition.ammunitionAmount;
-        remainingProjectileAmountInMagazine = weaponAmmunition.remainingAmmunitionAmountInMagazine;
+        remainingProjectileAmountInMagazine = weaponAmmunition.remainingAmmunitionStored;
         //Update ammunition UI with the current weapon ammunition
         UpdateProjectileUIAmount();
 
