@@ -9,4 +9,9 @@ public class HealthItem : PickupItem
     {
         base.UseItem();
     }
+
+    public override void UpdateFromSubject(ISubject subject) 
+    { 
+        
+    }
 }

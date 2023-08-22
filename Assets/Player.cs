@@ -40,6 +40,9 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject currentWeapon;
     [SerializeField] BulletInstantiator bulletInstantiator;
 
+    //Pickup Item Event Manager
+    public PickupItemEventManager pickupItemEventManager;
+
 
     // Start is called before the first frame update
     void Start()
@@ -53,6 +56,8 @@ public class Player : MonoBehaviour
         switchWeapon = FindObjectOfType<SwitchWeapon>();
 
         bulletInstantiator = FindObjectOfType<BulletInstantiator>();
+
+        pickupItemEventManager = FindObjectOfType<PickupItemEventManager>();
     }
 
     // Update is called once per frame

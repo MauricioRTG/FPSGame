@@ -10,4 +10,9 @@ public class ShotgunAmmunitionItem : PickupItem
     {
         base.UseItem();
     }
+
+    public override void UpdateFromSubject(ISubject subject)
+    {
+
+    }
 }
