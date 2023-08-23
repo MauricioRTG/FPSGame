@@ -14,6 +14,14 @@ public class Player : MonoBehaviour
     //Health UI
     [SerializeField] Image healthImage;
     private RectTransform healthImageRectTransform;
+    public int Health
+    {
+        get { return health; }
+    }
+    public int MaxHealth
+    {
+        get { return maxHealth;}
+    }
 
     //Stamina
     [SerializeField] int maxStamina = 100;
@@ -58,6 +66,8 @@ public class Player : MonoBehaviour
         bulletInstantiator = FindObjectOfType<BulletInstantiator>();
 
         pickupItemEventManager = FindObjectOfType<PickupItemEventManager>();
+
+        pickupItemEventManager.NotifySubscribers(pickupItemType.Health);
     }
 
     // Update is called once per frame
@@ -100,6 +110,7 @@ public class Player : MonoBehaviour
     {
         health -= damageAmount;
         DecreaseUIHealth(damageAmount);
+        pickupItemEventManager.NotifySubscribers(pickupItemType.Health);
         if (health <= minHealth)
         {
             Die();
@@ -114,6 +125,7 @@ public class Player : MonoBehaviour
         {
             health = maxHealth;
         }
+        pickupItemEventManager.NotifySubscribers(pickupItemType.Health);
         IncreaseUIHealth(amount);
     }
 
