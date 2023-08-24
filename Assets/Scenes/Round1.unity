@@ -868,6 +868,7 @@ MonoBehaviour:
   defaultLayerMask:
     serializedVersion: 2
     m_Bits: 0
+  pickupItemEventManager: {fileID: 0}
 --- !u!114 &109075019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3609,6 +3610,10 @@ MonoBehaviour:
   itemName: ShotgunAmmunitionItem
   itemValue: 0
   ammunitionAmount: 5
+  pickupItemEventManager: {fileID: 0}
+  boxCollider: {fileID: 0}
+  remainingShotgunAmmunitionStored: 0
+  maxShotgunAmmunition: 0
 --- !u!65 &769353980
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7150,7 +7155,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1396956024284651747, guid: e327b188146445d48b2aa54923e54318, type: 3}
       propertyPath: maxAmmunitionAmount
-      value: 1000
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1396956024284651747, guid: e327b188146445d48b2aa54923e54318, type: 3}
+      propertyPath: remainingAmmunitionStored
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3548848467956141934, guid: e327b188146445d48b2aa54923e54318, type: 3}
       propertyPath: m_UseWorldSpace
@@ -10711,6 +10720,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PickupItemManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5769050357189681950, guid: 16bdf27747d728743866f04ad5b0a376, type: 3}
+      propertyPath: shotgun
+      value: 
+      objectReference: {fileID: 1785418322}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

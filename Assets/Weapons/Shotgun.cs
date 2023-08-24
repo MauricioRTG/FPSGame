@@ -20,7 +20,7 @@ public class Shotgun : Weapon
 
     void Start()
     {
-        weaponAmmunition = FindObjectOfType<WeaponAmmunition>();
+        weaponAmmunition = GetComponent<WeaponAmmunition>();
         playerCamara = FindObjectOfType<Camera>();
         Random.InitState(Time.frameCount);
         //GetLineRenderersFromParentTransform();
@@ -73,6 +73,7 @@ public class Shotgun : Weapon
             //Decrease ammunition according to the number of pellets fired
             weaponAmmunition.ammunitionAmount--;
         }
+
         //Disable line renderer after short delay
         Invoke("DisableTrail", trailDuration);
     }

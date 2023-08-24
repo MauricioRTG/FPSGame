@@ -9,6 +9,7 @@ public class PickupItemEventManager : MonoBehaviour, ISubject
 {
     [SerializeField] private List<PickupItem> _items;
     public Player player;
+    [SerializeField] public Shotgun shotgun; 
 
     void Start()
     {
@@ -26,6 +27,7 @@ public class PickupItemEventManager : MonoBehaviour, ISubject
     {
         foreach(PickupItem item in _items)
         {
+            //Makes sure that only the wanted items are called inside the item array
             if( item is HealthItem && pickupItemType == pickupItemType.Health)
             {
                 item.UpdateFromSubject(this);
