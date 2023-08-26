@@ -20,19 +20,27 @@ public class ShotgunAmmunitionItem : PickupItem
         pickupItemEventManager = (PickupItemEventManager)subject;
         boxCollider = GetComponent<BoxCollider>();
 
-        remainingShotgunAmmunitionStored = pickupItemEventManager.shotgun.weaponAmmunition.RemainingAmmunitionStored;
-        maxShotgunAmmunition = pickupItemEventManager.shotgun.weaponAmmunition.MaxAmmunitionAmountStored;
-
-        if(boxCollider != null)
+        if (pickupItemEventManager.shotgun != null)
         {
-            if (remainingShotgunAmmunitionStored >= maxShotgunAmmunition)
+            remainingShotgunAmmunitionStored = pickupItemEventManager.shotgun.weaponAmmunition.RemainingAmmunitionStored;
+            maxShotgunAmmunition = pickupItemEventManager.shotgun.weaponAmmunition.MaxAmmunitionAmountStored;
+
+            if (boxCollider != null)
             {
-                boxCollider.enabled = false;
+                if (remainingShotgunAmmunitionStored >= maxShotgunAmmunition)
+                {
+                    boxCollider.enabled = false;
+                }
+                else
+                {
+                    boxCollider.enabled = true;
+                }
             }
-            else
-            {
-                boxCollider.enabled = true;
-            }
+        }
+        else
+        {
+            //If there is no shotgun active then don't allow the player to collide with the item
+            boxCollider.enabled = false;
         }
     }
 }

@@ -26,6 +26,7 @@ public class WeaponAmmunition : MonoBehaviour
         pickupItemEventManager = FindObjectOfType<PickupItemEventManager>();
         //Notify ShotgunAmmunition items, so they disable their collider because player has full ammunition at the start
         pickupItemEventManager.NotifySubscribers(pickupItemType.ShotgunAmmunition);
+        pickupItemEventManager.NotifySubscribers(pickupItemType.PistolAmmunition);
     }
 
     public void Reload()
@@ -35,7 +36,7 @@ public class WeaponAmmunition : MonoBehaviour
         //Update ShotgunAmmunitionItem Collider
         if(TryGetComponent<Pistol>(out Pistol pistol))
         {
-            //pickupItemEventManager.NotifySubscribers(pickupItemType.Pistol);
+            pickupItemEventManager.NotifySubscribers(pickupItemType.PistolAmmunition);
         }
         else if(TryGetComponent<Shotgun> (out Shotgun shotgun))
         {

@@ -10869,6 +10869,10 @@ PrefabInstance:
       value: PickupItemManager
       objectReference: {fileID: 0}
     - target: {fileID: 5769050357189681950, guid: 16bdf27747d728743866f04ad5b0a376, type: 3}
+      propertyPath: pistol
+      value: 
+      objectReference: {fileID: 448009872}
+    - target: {fileID: 5769050357189681950, guid: 16bdf27747d728743866f04ad5b0a376, type: 3}
       propertyPath: shotgun
       value: 
       objectReference: {fileID: 1785418322}

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum pickupItemType { Health, ShotgunAmmunition};
+public enum pickupItemType { Health, ShotgunAmmunition, PistolAmmunition};
 
 public class PickupItemEventManager : MonoBehaviour, ISubject
 {
     [SerializeField] private List<PickupItem> _items;
     public Player player;
-    [SerializeField] public Shotgun shotgun; 
+    [SerializeField] public Shotgun shotgun;
+    [SerializeField] public Pistol pistol;
 
     void Start()
     {
@@ -28,11 +29,15 @@ public class PickupItemEventManager : MonoBehaviour, ISubject
         foreach(PickupItem item in _items)
         {
             //Makes sure that only the wanted items are called inside the item array
-            if( item is HealthItem && pickupItemType == pickupItemType.Health)
+            if (item is HealthItem && pickupItemType == pickupItemType.Health)
             {
                 item.UpdateFromSubject(this);
             }
-            else if(item is ShotgunAmmunitionItem && pickupItemType == pickupItemType.ShotgunAmmunition)
+            else if (item is ShotgunAmmunitionItem && pickupItemType == pickupItemType.ShotgunAmmunition)
+            {
+                item.UpdateFromSubject(this);
+            }
+            else if (item is PistolAmmunitionItem && pickupItemType == pickupItemType.PistolAmmunition)
             {
                 item.UpdateFromSubject(this);
             }

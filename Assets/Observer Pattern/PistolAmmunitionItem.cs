@@ -15,14 +15,35 @@ public class PistolAmmunitionItem : PickupItem
         base.UseItem();
     }
 
-    /*public override void UpdateFromSubject(ISubject subject)
+    public override void UpdateFromSubject(ISubject subject)
     {
         Debug.Log("PistolAmmunitionItem collider updated");
         pickupItemEventManager = (PickupItemEventManager)subject;
         boxCollider = GetComponent<BoxCollider>();
 
-        remainingPistolAmmunitionStored = pickupItemEventManager
 
-    }*/
+        if(pickupItemEventManager.pistol != null)
+        {
+            remainingPistolAmmunitionStored = pickupItemEventManager.pistol.weaponAmmunition.remainingAmmunitionStored;
+            maxPistolAmmunitionStored = pickupItemEventManager.pistol.weaponAmmunition.MaxAmmunitionAmountStored;
+
+            if (boxCollider != null)
+            {
+                if (remainingPistolAmmunitionStored >= maxPistolAmmunitionStored)
+                {
+                    boxCollider.enabled = false;
+                }
+                else
+                {
+                    boxCollider.enabled = true;
+                }
+            }
+        }
+        else
+        {
+            //If there is no pistol active then don't allow the player to collide with the item
+            boxCollider.enabled = false;
+        }
+    }
 
 }
