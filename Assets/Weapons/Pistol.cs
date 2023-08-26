@@ -5,11 +5,11 @@ using UnityEngine;
 public class Pistol : Weapon
 {
     public GameObject projectile;
-    [SerializeField] WeaponAmmunition weaponAmmunition;
+    [SerializeField] public WeaponAmmunition weaponAmmunition;
 
     void Start()
     {
-        weaponAmmunition = FindObjectOfType<WeaponAmmunition>();
+        weaponAmmunition = GetComponent<WeaponAmmunition>();
     }
 
     public override void InstantiateBullets()
@@ -18,5 +18,10 @@ public class Pistol : Weapon
         weaponAmmunition.ammunitionAmount--;
         //Destroy after 2 seconds to stop clutter.
         Destroy(clone, 5.0f);
+    }
+
+    public void AddAmmunition(int ammunitionToAdd)
+    {
+        weaponAmmunition.AddAmmunition(ammunitionToAdd);
     }
 }

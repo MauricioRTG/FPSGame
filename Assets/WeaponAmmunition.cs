@@ -33,7 +33,14 @@ public class WeaponAmmunition : MonoBehaviour
         ammunitionAmount = remainingAmmunitionStored; //TODO: Add or complete ammunition not reasign
         remainingAmmunitionStored = 0;
         //Update ShotgunAmmunitionItem Collider
-        pickupItemEventManager.NotifySubscribers(pickupItemType.ShotgunAmmunition);
+        if(TryGetComponent<Pistol>(out Pistol pistol))
+        {
+            //pickupItemEventManager.NotifySubscribers(pickupItemType.Pistol);
+        }
+        else if(TryGetComponent<Shotgun> (out Shotgun shotgun))
+        {
+            pickupItemEventManager.NotifySubscribers(pickupItemType.ShotgunAmmunition);
+        }
     }
 
     void Update()
