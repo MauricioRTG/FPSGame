@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using UnityEngine;
 
 public class PlayerPickupItem : MonoBehaviour
@@ -9,45 +10,43 @@ public class PlayerPickupItem : MonoBehaviour
     [SerializeField] Shotgun shotgun;
     [SerializeField] Pistol pistol;
     [SerializeField] LayerMask defaultLayerMask;
+    public PickupItemEventManager pickupItemEventManager;
 
     private void Start()
     {
         player = GetComponent<Player>();
+        pickupItemEventManager = FindObjectOfType<PickupItemEventManager>();
 
-    }
-
-    public void Update()
-    {
-        //TODO: Make the Item not collide when the health or ammunition storage are full
-        //(Maybe i have to do a virtual function for each item to make sure the item can be picked up, satifying especific conditions about that item
-        //If item can be picked up
-        //enable collider with player
-        //if not, diable collider with player
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        //Checks if the player collided with a gameobject that has a ShotgunAmmunitionItem or HealhtItem script
+        //Checks if the player collided with a gameobject that has a ShotgunAmmunitionItem, PistolAmmunitionItem or HealhtItem script
         if (collision.gameObject.TryGetComponent(out ShotgunAmmunitionItem shotgunAmmunitionItem))
         {
-            //Get boxCollider Inside ShotgunAmmunitionItem
-            //CapsuleCollider playerCapsuleCollider = player.gameObject.GetComponent<CapsuleCollider>();
-            
-            //Add ammunition to player
+            //Add ammunition to player's shotgun
             int ammunitionToAdd = shotgunAmmunitionItem.ammunitionAmount;
-            if (ThereIsSpaceForAmmunitionToBeStored(ammunitionToAdd))
+            if (ThereIsSpaceForAmmunitionToBeStoredInShotgun(ammunitionToAdd))
             {
-
-                //playerCapsuleCollider.excludeLayers = defaultLayerMask;
-
                 AddAmmunitionToShotgun(ammunitionToAdd);
-                //Destroy item after is collected
+
+                //Destroy and unsubscribe item after is collected
+                pickupItemEventManager.Unsubscribe(shotgunAmmunitionItem);
                 Destroy(collision.gameObject);
             }
-            else
+        }
+        else if (collision.gameObject.TryGetComponent(out PistolAmmunitionItem pistolAmmunitionItem))
+        {
+            //Add ammunition to player's pistol
+            int ammunitionToAdd = pistolAmmunitionItem.ammunitionAmount;
+            if(ThereIsSpaceForAmmunitionToBeStoredInPistol(ammunitionToAdd))
             {
-                //playerCapsuleCollider.excludeLayers = collision.gameObject.layer;
+                AddAmmunitionToPistol(ammunitionToAdd);
+
+                //Destroy and unsubscribe item after is collected
+                Destroy(collision.gameObject);
             }
+
         }
         else if (collision.gameObject.TryGetComponent(out HealthItem healthItem))
         {
@@ -55,7 +54,8 @@ public class PlayerPickupItem : MonoBehaviour
             int healthToAdd = healthItem.healthValue;
             AddHealthToPlayer(healthToAdd);
 
-            //Destroy item after is collected
+            //Destroy and unsubscribe item after is collected
+            pickupItemEventManager.Unsubscribe(healthItem);
             Destroy(collision.gameObject);
         }
     }
@@ -67,7 +67,7 @@ public class PlayerPickupItem : MonoBehaviour
 
     private void AddAmmunitionToPistol(int amount)
     {
-        
+        pistol.AddAmmunition(amount);
     }
 
     private void AddHealthToPlayer(int amount)
@@ -75,7 +75,7 @@ public class PlayerPickupItem : MonoBehaviour
         player.IncreaseHealth(amount);
     }
 
-    private bool ThereIsSpaceForAmmunitionToBeStored(int ammunitionToAdd)
+    private bool ThereIsSpaceForAmmunitionToBeStoredInShotgun(int ammunitionToAdd)
     {
         int newRemainingAmmunitionStoredAmount = shotgun.weaponAmmunition.remainingAmmunitionStored + ammunitionToAdd;
 
@@ -84,6 +84,18 @@ public class PlayerPickupItem : MonoBehaviour
             return true;
         }
         
+        return false;
+    }
+
+    private bool ThereIsSpaceForAmmunitionToBeStoredInPistol(int ammunitionToAdd)
+    {
+        int newRemainingAmmunitionStoredAmount = pistol.weaponAmmunition.remainingAmmunitionStored + ammunitionToAdd;
+
+        if(newRemainingAmmunitionStoredAmount < pistol.weaponAmmunition.MaxAmmunitionAmountStored)
+        {
+            return true;
+        }
+
         return false;
     }
 }

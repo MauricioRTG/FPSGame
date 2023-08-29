@@ -10,10 +10,12 @@ public class WeaponAmmunition : MonoBehaviour
     [SerializeField] int maxAmmunitionAmountStored = 50;
     [SerializeField] public int ammunitionAmount;
     [SerializeField] public int remainingAmmunitionStored;
+    private PickupItemEventManager pickupItemEventManager;
 
     public int MaxAmmunitionAmount { get => maxAmmunitionAmount; }
     public int MaxAmmunitionAmountStored { get => maxAmmunitionAmountStored; }
 
+    public int RemainingAmmunitionStored { get => remainingAmmunitionStored; }
     public int AmmunitionAmount { get => ammunitionAmount; }
 
     // Start is called before the first frame update
@@ -21,12 +23,25 @@ public class WeaponAmmunition : MonoBehaviour
     {
         ammunitionAmount = maxAmmunitionAmount;
         remainingAmmunitionStored = maxAmmunitionAmountStored;
+        pickupItemEventManager = FindObjectOfType<PickupItemEventManager>();
+        //Notify ShotgunAmmunition items, so they disable their collider because player has full ammunition at the start
+        pickupItemEventManager.NotifySubscribers(pickupItemType.ShotgunAmmunition);
+        pickupItemEventManager.NotifySubscribers(pickupItemType.PistolAmmunition);
     }
 
     public void Reload()
     {
         ammunitionAmount = remainingAmmunitionStored; //TODO: Add or complete ammunition not reasign
         remainingAmmunitionStored = 0;
+        //Update ShotgunAmmunitionItem Collider
+        if(TryGetComponent<Pistol>(out Pistol pistol))
+        {
+            pickupItemEventManager.NotifySubscribers(pickupItemType.PistolAmmunition);
+        }
+        else if(TryGetComponent<Shotgun> (out Shotgun shotgun))
+        {
+            pickupItemEventManager.NotifySubscribers(pickupItemType.ShotgunAmmunition);
+        }
     }
 
     void Update()

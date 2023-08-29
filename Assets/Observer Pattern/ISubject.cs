@@ -12,5 +12,5 @@ public interface ISubject
     void Unsubscribe(IObserver observer);
 
     //Notify all observers or subscribers of an event
-    void NotifySubscribers();
+    void NotifySubscribers(pickupItemType pickupItemType);
 }
