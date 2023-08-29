@@ -44,6 +44,7 @@ public class PlayerPickupItem : MonoBehaviour
                 AddAmmunitionToPistol(ammunitionToAdd);
 
                 //Destroy and unsubscribe item after is collected
+                pickupItemEventManager.Unsubscribe(pistolAmmunitionItem);
                 Destroy(collision.gameObject);
             }
 

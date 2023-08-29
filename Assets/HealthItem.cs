@@ -5,6 +5,14 @@ using UnityEngine;
 public class HealthItem : PickupItem
 {
     public int healthValue;
+    [SerializeField] BoxCollider boxCollider;
+
+    private void Start()
+    {
+        boxCollider = GetComponent<BoxCollider>();
+        boxCollider.enabled = false;
+    }
+
     public override void UseItem()
     {
         base.UseItem();
@@ -14,8 +22,6 @@ public class HealthItem : PickupItem
     {
         Debug.Log("HealthItem Collider updated");
         PickupItemEventManager pickupItemEventManager = (PickupItemEventManager)subject;
-
-        BoxCollider boxCollider = GetComponent<BoxCollider>();
 
         if(boxCollider != null)
         {

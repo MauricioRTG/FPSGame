@@ -9,6 +9,13 @@ public class ShotgunAmmunitionItem : PickupItem
     [SerializeField] BoxCollider boxCollider;
     [SerializeField] int remainingShotgunAmmunitionStored;
     [SerializeField] int maxShotgunAmmunition;
+
+    private void Start()
+    {
+        boxCollider = GetComponent<BoxCollider>();
+        boxCollider.enabled = false;
+
+    }
     public override void UseItem()
     {
         base.UseItem();

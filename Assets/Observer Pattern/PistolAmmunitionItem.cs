@@ -10,6 +10,12 @@ public class PistolAmmunitionItem : PickupItem
     int remainingPistolAmmunitionStored;
     int maxPistolAmmunitionStored;
 
+    private void Start()
+    {
+        boxCollider = GetComponent<BoxCollider>();
+        boxCollider.enabled = false;
+
+    }
     public override void UseItem()
     {
         base.UseItem();
@@ -19,8 +25,6 @@ public class PistolAmmunitionItem : PickupItem
     {
         Debug.Log("PistolAmmunitionItem collider updated");
         pickupItemEventManager = (PickupItemEventManager)subject;
-        boxCollider = GetComponent<BoxCollider>();
-
 
         if(pickupItemEventManager.pistol != null)
         {

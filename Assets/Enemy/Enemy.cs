@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] ScoreManager score;
     [SerializeField] int enemyPoints = 50;
     [SerializeField] WaveManager waveManager;
+    [SerializeField] DropItem dropItem;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +27,12 @@ public class Enemy : MonoBehaviour
             Debug.LogError("Enemy : ScoreManager component not found");
         }
 
+        dropItem = GetComponent<DropItem>();
+        if(dropItem == null)
+        {
+            Debug.LogError("Enemy : DropItem component not found");
+        }
+
         currentHealth = maxHealth;
     }
 
@@ -35,6 +42,8 @@ public class Enemy : MonoBehaviour
 
         if(currentHealth == 0)
         {
+            //Drop a random item or none
+            dropItem.DropPickupItem(transform.position);
             Die();
         }
     }
