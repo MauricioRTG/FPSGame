@@ -5,16 +5,16 @@ using UnityEngine;
 public class PistolAmmunitionItem : PickupItem
 {
     public int ammunitionAmount;
-    PickupItemEventManager pickupItemEventManager;
     BoxCollider boxCollider;
     int remainingPistolAmmunitionStored;
     int maxPistolAmmunitionStored;
+    [SerializeField] float itemDuration = 5.0f;
 
     private void Start()
     {
         boxCollider = GetComponent<BoxCollider>();
         boxCollider.enabled = false;
-
+        StartCoroutine(DestroyPickupItem(gameObject, itemDuration));
     }
     public override void UseItem()
     {
@@ -48,6 +48,11 @@ public class PistolAmmunitionItem : PickupItem
             //If there is no pistol active then don't allow the player to collide with the item
             boxCollider.enabled = false;
         }
+    }
+
+    public override IEnumerator DestroyPickupItem(GameObject pickupItem, float pickupItemDuration)
+    {
+        yield return base.DestroyPickupItem(pickupItem, pickupItemDuration);
     }
 
 }

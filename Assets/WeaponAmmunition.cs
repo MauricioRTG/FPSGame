@@ -24,10 +24,6 @@ public class WeaponAmmunition : MonoBehaviour
         ammunitionAmount = maxAmmunitionAmount;
         remainingAmmunitionStored = maxAmmunitionAmountStored;
         pickupItemEventManager = FindObjectOfType<PickupItemEventManager>();
-        //Notify ShotgunAmmunition items, so they disable their collider because player has full ammunition at the start
-        //Maybe this is not necessary because the items diable their collider at the start()
-        pickupItemEventManager.NotifySubscribers(pickupItemType.ShotgunAmmunition);
-        pickupItemEventManager.NotifySubscribers(pickupItemType.PistolAmmunition);
     }
 
     public void Reload()

@@ -6,11 +6,13 @@ public class HealthItem : PickupItem
 {
     public int healthValue;
     [SerializeField] BoxCollider boxCollider;
+    [SerializeField] float itemDuration = 5.0f;
 
     private void Start()
     {
         boxCollider = GetComponent<BoxCollider>();
         boxCollider.enabled = false;
+        StartCoroutine(DestroyPickupItem(gameObject, itemDuration));
     }
 
     public override void UseItem()
@@ -34,5 +36,10 @@ public class HealthItem : PickupItem
                 boxCollider.enabled = true;
             }
         }
+    }
+
+    public override IEnumerator DestroyPickupItem(GameObject pickupItem, float pickupItemDuration)
+    {
+        yield return base.DestroyPickupItem(pickupItem, pickupItemDuration);
     }
 }

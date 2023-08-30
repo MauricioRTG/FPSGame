@@ -5,16 +5,16 @@ using UnityEngine;
 public class ShotgunAmmunitionItem : PickupItem
 {
     public int ammunitionAmount;
-    [SerializeField] PickupItemEventManager pickupItemEventManager;
     [SerializeField] BoxCollider boxCollider;
     [SerializeField] int remainingShotgunAmmunitionStored;
     [SerializeField] int maxShotgunAmmunition;
+    [SerializeField] float itemDuration = 5.0f;
 
     private void Start()
     {
         boxCollider = GetComponent<BoxCollider>();
         boxCollider.enabled = false;
-
+        StartCoroutine(DestroyPickupItem(gameObject, itemDuration));
     }
     public override void UseItem()
     {
@@ -49,5 +49,9 @@ public class ShotgunAmmunitionItem : PickupItem
             //If there is no shotgun active then don't allow the player to collide with the item
             boxCollider.enabled = false;
         }
+    }
+    public override IEnumerator DestroyPickupItem(GameObject pickupItem, float pickupItemDuration)
+    {
+        yield return base.DestroyPickupItem(pickupItem, pickupItemDuration);
     }
 }
