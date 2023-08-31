@@ -30,20 +30,20 @@ public class DropItem : MonoBehaviour
         else if(randomValue < 7) //20%
         {
             newHealthItem = Instantiate(healthItemPrefab, dropPosition, Quaternion.identity);
-            pickupItemEventManager.Subscribe(newHealthItem.GetComponent<HealthItem>());
+            pickupItemEventManager.Subscribe(newHealthItem);
             pickupItemEventManager.NotifySubscribers(pickupItemType.Health);
 
         }
         else if (randomValue < 9) //20%
         {
             newPistolAmmunitionItem = Instantiate(pistolAmmunitionItemPrefab, dropPosition, Quaternion.identity);
-            pickupItemEventManager.Subscribe(newPistolAmmunitionItem.GetComponent<PistolAmmunitionItem>());
+            pickupItemEventManager.Subscribe(newPistolAmmunitionItem);
             pickupItemEventManager.NotifySubscribers(pickupItemType.PistolAmmunition);
         }
         else if (randomValue < 11) //20%
         {
             newShotgunAmmunitionItem = Instantiate(shotgunAmmunitionItemPrefab, dropPosition, Quaternion.identity);
-            pickupItemEventManager.Subscribe(newShotgunAmmunitionItem.GetComponent<ShotgunAmmunitionItem>());
+            pickupItemEventManager.Subscribe(newShotgunAmmunitionItem);
             pickupItemEventManager.NotifySubscribers(pickupItemType.ShotgunAmmunition);
         }
     }

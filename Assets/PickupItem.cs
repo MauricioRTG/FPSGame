@@ -8,7 +8,9 @@ public class PickupItem : MonoBehaviour, IObserver
 {
     public string itemName;
     public int itemValue;
-    
+    [SerializeField] public float itemDuration = 5.0f;
+    [SerializeField] public bool destroyAfterSpecifiedDuration = true;
+
     protected PickupItemEventManager pickupItemEventManager;
 
     void Start()
@@ -17,11 +19,4 @@ public class PickupItem : MonoBehaviour, IObserver
     }
     public virtual void UpdateFromSubject(ISubject subject) { }
     public virtual void UseItem() { }
-
-    public virtual IEnumerator DestroyPickupItem(GameObject pickupItem, float pickupItemDuration)
-    {
-        yield return new WaitForSeconds(pickupItemDuration);
-        Destroy(pickupItem);
-        Debug.Log("Object destroyed: " + pickupItem.name);
-    }
 }

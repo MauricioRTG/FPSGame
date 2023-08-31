@@ -6,10 +6,10 @@ using UnityEngine;
 public interface ISubject
 {
     //Add observer
-    void Subscribe(IObserver observer);
+    void Subscribe(GameObject observer);
 
     //Remove observer
-    void Unsubscribe(IObserver observer);
+    void Unsubscribe(GameObject observer);
 
     //Notify all observers or subscribers of an event
     void NotifySubscribers(pickupItemType pickupItemType);

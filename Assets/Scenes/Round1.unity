@@ -10624,6 +10624,10 @@ PrefabInstance:
       propertyPath: itemDuration
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4563718761561241165, guid: 0d305f01acbcd6e419c651e04efc917a, type: 3}
+      propertyPath: destroyAfterSpecifiedDuration
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
