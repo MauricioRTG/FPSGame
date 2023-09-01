@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3722126386300679269}
   - component: {fileID: 126196328564045070}
   - component: {fileID: 6272965283814115223}
+  - component: {fileID: 6788105738468837080}
   - component: {fileID: 4611023888678970538}
   m_Layer: 8
   m_Name: Enemy
@@ -129,6 +130,7 @@ MonoBehaviour:
   score: {fileID: 0}
   enemyPoints: 50
   waveManager: {fileID: 0}
+  dropItem: {fileID: 0}
 --- !u!114 &126196328564045070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,6 +160,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   agent: {fileID: 0}
+--- !u!114 &6788105738468837080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4702891407641451739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba780a9fdd6f83e44a84f0410a97a9ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthItemPrefab: {fileID: 1879400347575931010, guid: 7997350d1c9c84b47b03b532864156a3, type: 3}
+  pistolAmmunitionItemPrefab: {fileID: 1471671820151312572, guid: 0d305f01acbcd6e419c651e04efc917a, type: 3}
+  shotgunAmmunitionItemPrefab: {fileID: 6299582379466283117, guid: 787cce49d3379484dabbfa582d8ed179, type: 3}
 --- !u!195 &4611023888678970538
 NavMeshAgent:
   m_ObjectHideFlags: 0

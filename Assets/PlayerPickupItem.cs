@@ -31,7 +31,7 @@ public class PlayerPickupItem : MonoBehaviour
                 AddAmmunitionToShotgun(ammunitionToAdd);
 
                 //Destroy and unsubscribe item after is collected
-                pickupItemEventManager.Unsubscribe(shotgunAmmunitionItem);
+                pickupItemEventManager.Unsubscribe(collision.gameObject);
                 Destroy(collision.gameObject);
             }
         }
@@ -44,6 +44,7 @@ public class PlayerPickupItem : MonoBehaviour
                 AddAmmunitionToPistol(ammunitionToAdd);
 
                 //Destroy and unsubscribe item after is collected
+                pickupItemEventManager.Unsubscribe(collision.gameObject);
                 Destroy(collision.gameObject);
             }
 
@@ -55,7 +56,7 @@ public class PlayerPickupItem : MonoBehaviour
             AddHealthToPlayer(healthToAdd);
 
             //Destroy and unsubscribe item after is collected
-            pickupItemEventManager.Unsubscribe(healthItem);
+            pickupItemEventManager.Unsubscribe(collision.gameObject);
             Destroy(collision.gameObject);
         }
     }

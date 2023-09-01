@@ -5,10 +5,15 @@ using UnityEngine;
 public class ShotgunAmmunitionItem : PickupItem
 {
     public int ammunitionAmount;
-    [SerializeField] PickupItemEventManager pickupItemEventManager;
     [SerializeField] BoxCollider boxCollider;
     [SerializeField] int remainingShotgunAmmunitionStored;
     [SerializeField] int maxShotgunAmmunition;
+
+    private void Start()
+    {
+        boxCollider = GetComponent<BoxCollider>();
+        boxCollider.enabled = false;
+    }
     public override void UseItem()
     {
         base.UseItem();

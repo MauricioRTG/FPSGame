@@ -1,13 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 
 public enum pickupItemType { Health, ShotgunAmmunition, PistolAmmunition};
 
 public class PickupItemEventManager : MonoBehaviour, ISubject
 {
-    [SerializeField] private List<PickupItem> _items;
+    [SerializeField] public List<GameObject> _items;
     public Player player;
     [SerializeField] public Shotgun shotgun;
     [SerializeField] public Pistol pistol;
@@ -18,7 +21,7 @@ public class PickupItemEventManager : MonoBehaviour, ISubject
         PickupItem[] itemsInScenes = FindObjectsOfType<PickupItem>();
         foreach (var item in itemsInScenes) 
         { 
-            Subscribe(item);
+            Subscribe(item.gameObject);
         };
 
         player = FindObjectOfType<Player>();
@@ -26,31 +29,68 @@ public class PickupItemEventManager : MonoBehaviour, ISubject
 
     public void NotifySubscribers(pickupItemType pickupItemType)
     {
-        foreach(PickupItem item in _items)
+        foreach(GameObject item in _items)
         {
             //Makes sure that only the wanted items are called inside the item array
-            if (item is HealthItem && pickupItemType == pickupItemType.Health)
+            if (item.TryGetComponent<HealthItem>(out HealthItem healthItem) && pickupItemType == pickupItemType.Health)
             {
-                item.UpdateFromSubject(this);
+                healthItem.UpdateFromSubject(this);
             }
-            else if (item is ShotgunAmmunitionItem && pickupItemType == pickupItemType.ShotgunAmmunition)
+            else if (item.TryGetComponent<ShotgunAmmunitionItem>(out ShotgunAmmunitionItem shotgunAmmunitionItem) && pickupItemType == pickupItemType.ShotgunAmmunition)
             {
-                item.UpdateFromSubject(this);
+                shotgunAmmunitionItem.UpdateFromSubject(this);
             }
-            else if (item is PistolAmmunitionItem && pickupItemType == pickupItemType.PistolAmmunition)
+            else if (item.TryGetComponent<PistolAmmunitionItem>(out PistolAmmunitionItem pistolAmmunitionItem) && pickupItemType == pickupItemType.PistolAmmunition)
             {
-                item.UpdateFromSubject(this);
+                pistolAmmunitionItem.UpdateFromSubject(this);
             }
         }
     }
 
-    public void Subscribe(IObserver observer)
+    public void Subscribe(GameObject observer)
     {
-        _items.Add((PickupItem)observer);
+        _items.Add(observer);
+
+        PickupItem pickupItemType = ObtainPickupItemType(observer);
+        if (pickupItemType.destroyAfterSpecifiedDuration)
+        {
+            //Start coroutine that destroys item after a specified duration
+            StartCoroutine(DestroyPickupItem(observer, pickupItemType.itemDuration));
+        }
     }
 
-    public void Unsubscribe(IObserver observer)
+    public void Unsubscribe(GameObject observer)
     {
-        _items.Remove((PickupItem)observer);
+        _items.Remove(observer);    
+    }
+
+    public IEnumerator DestroyPickupItem(GameObject observer, float pickupItemDuration)
+    {
+        yield return new WaitForSeconds(pickupItemDuration);
+        Unsubscribe(observer);
+        Debug.Log("Item unsubscribed: " + observer.name);
+        yield return new WaitForSeconds(pickupItemDuration);
+        Destroy(observer);
+        Debug.Log("Destroyed: " + observer.name);
+    }
+
+    public PickupItem ObtainPickupItemType(GameObject pickupItem)
+    {
+        if(pickupItem.TryGetComponent<ShotgunAmmunitionItem>(out ShotgunAmmunitionItem shotgunAmmunitionItem))
+        {
+            return shotgunAmmunitionItem;
+        }
+        else if (pickupItem.TryGetComponent<PistolAmmunitionItem>(out PistolAmmunitionItem pistolAmmunitionItem))
+        {
+            return pistolAmmunitionItem;
+        }
+        else if (pickupItem.TryGetComponent<HealthItem>(out HealthItem healthItem))
+        {
+            return healthItem;
+        }
+        else
+        {
+            return null;
+        }
     }
 }
