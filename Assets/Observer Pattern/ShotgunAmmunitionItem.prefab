@@ -53,8 +53,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.2905674, y: 1.4644839, z: 0.35307243}
-  m_Center: {x: 0.029387712, y: 1.2885315, z: -0.0076142102}
+  m_Size: {x: 0.2905674, y: 1.4283862, z: 0.35307243}
+  m_Center: {x: 0.029387712, y: 0.7485441, z: -0.0076142102}
 --- !u!114 &5731115507081422248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,8 +69,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: ShotgunAmmunitionItem
   itemValue: 0
+  itemDuration: 5
+  destroyAfterSpecifiedDuration: 1
   ammunitionAmount: 5
-  pickupItemEventManager: {fileID: 0}
   boxCollider: {fileID: 0}
   remainingShotgunAmmunitionStored: 0
   maxShotgunAmmunition: 0
@@ -112,11 +113,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8949704625245647606, guid: 43e328bae3536a84eaca0891841b6f1d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.966
+      value: 0.51
       objectReference: {fileID: 0}
     - target: {fileID: 8949704625245647606, guid: 43e328bae3536a84eaca0891841b6f1d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8949704625245647606, guid: 43e328bae3536a84eaca0891841b6f1d, type: 3}
       propertyPath: m_LocalRotation.w
