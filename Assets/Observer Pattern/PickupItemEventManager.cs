@@ -1,9 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 
 public enum pickupItemType { Health, ShotgunAmmunition, PistolAmmunition};
