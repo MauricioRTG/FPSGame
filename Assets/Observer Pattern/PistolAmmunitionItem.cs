@@ -13,6 +13,8 @@ public class PistolAmmunitionItem : PickupItem
     {
         boxCollider = GetComponent<BoxCollider>();
         boxCollider.enabled = false;
+        pickupItemEventManager = FindObjectOfType<PickupItemEventManager>();
+        pickupItemEventManager.NotifySubscribers(pickupItemType.PistolAmmunition);
     }
     public override void UseItem()
     {
@@ -24,7 +26,7 @@ public class PistolAmmunitionItem : PickupItem
         Debug.Log("PistolAmmunitionItem collider updated");
         pickupItemEventManager = (PickupItemEventManager)subject;
 
-        if(pickupItemEventManager.pistol != null)
+        if(pickupItemEventManager.pistol != null && pickupItemEventManager.pistol.weaponAmmunition != null)
         {
             remainingPistolAmmunitionStored = pickupItemEventManager.pistol.weaponAmmunition.remainingAmmunitionStored;
             maxPistolAmmunitionStored = pickupItemEventManager.pistol.weaponAmmunition.MaxAmmunitionAmountStored;

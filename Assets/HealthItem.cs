@@ -11,6 +11,8 @@ public class HealthItem : PickupItem
     {
         boxCollider = GetComponent<BoxCollider>();
         boxCollider.enabled = false;
+        pickupItemEventManager = FindObjectOfType<PickupItemEventManager>();
+        pickupItemEventManager.NotifySubscribers(pickupItemType.Health);
     }
 
     public override void UseItem()
@@ -21,7 +23,7 @@ public class HealthItem : PickupItem
     public override void UpdateFromSubject(ISubject subject) 
     {
         Debug.Log("HealthItem Collider updated");
-        PickupItemEventManager pickupItemEventManager = (PickupItemEventManager)subject;
+        pickupItemEventManager = (PickupItemEventManager)subject;
 
         if(boxCollider != null)
         {

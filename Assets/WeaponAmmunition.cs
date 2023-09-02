@@ -90,5 +90,10 @@ public class WeaponAmmunition : MonoBehaviour
     public void AddAmmunition(int ammunitionToAdd)
     {
         remainingAmmunitionStored += ammunitionToAdd;
+
+        if(remainingAmmunitionStored > maxAmmunitionAmountStored)
+        {
+            remainingAmmunitionStored = maxAmmunitionAmountStored;
+        }
     }
 }

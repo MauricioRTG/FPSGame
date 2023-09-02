@@ -10361,6 +10361,10 @@ PrefabInstance:
       propertyPath: itemDuration
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 5731115507081422248, guid: 787cce49d3379484dabbfa582d8ed179, type: 3}
+      propertyPath: destroyAfterSpecifiedDuration
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6299582379466283117, guid: 787cce49d3379484dabbfa582d8ed179, type: 3}
       propertyPath: m_Name
       value: ShotgunAmmunitionItem
@@ -10626,7 +10630,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4563718761561241165, guid: 0d305f01acbcd6e419c651e04efc917a, type: 3}
       propertyPath: destroyAfterSpecifiedDuration
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10692,6 +10696,10 @@ PrefabInstance:
     - target: {fileID: 8528048147127077481, guid: 7997350d1c9c84b47b03b532864156a3, type: 3}
       propertyPath: itemDuration
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8528048147127077481, guid: 7997350d1c9c84b47b03b532864156a3, type: 3}
+      propertyPath: destroyAfterSpecifiedDuration
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

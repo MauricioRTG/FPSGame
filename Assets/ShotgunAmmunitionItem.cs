@@ -13,6 +13,8 @@ public class ShotgunAmmunitionItem : PickupItem
     {
         boxCollider = GetComponent<BoxCollider>();
         boxCollider.enabled = false;
+        pickupItemEventManager = FindObjectOfType<PickupItemEventManager>();
+        pickupItemEventManager.NotifySubscribers(pickupItemType.ShotgunAmmunition);
     }
     public override void UseItem()
     {

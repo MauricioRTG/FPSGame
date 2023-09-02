@@ -26,28 +26,24 @@ public class PlayerPickupItem : MonoBehaviour
         {
             //Add ammunition to player's shotgun
             int ammunitionToAdd = shotgunAmmunitionItem.ammunitionAmount;
-            if (ThereIsSpaceForAmmunitionToBeStoredInShotgun(ammunitionToAdd))
-            {
-                AddAmmunitionToShotgun(ammunitionToAdd);
+            
+            AddAmmunitionToShotgun(ammunitionToAdd);
 
-                //Destroy and unsubscribe item after is collected
-                pickupItemEventManager.Unsubscribe(collision.gameObject);
-                Destroy(collision.gameObject);
-            }
+            //Destroy and unsubscribe item after is collected
+            pickupItemEventManager.Unsubscribe(collision.gameObject);
+            Destroy(collision.gameObject);
+            
         }
         else if (collision.gameObject.TryGetComponent(out PistolAmmunitionItem pistolAmmunitionItem))
         {
             //Add ammunition to player's pistol
             int ammunitionToAdd = pistolAmmunitionItem.ammunitionAmount;
-            if(ThereIsSpaceForAmmunitionToBeStoredInPistol(ammunitionToAdd))
-            {
-                AddAmmunitionToPistol(ammunitionToAdd);
-
-                //Destroy and unsubscribe item after is collected
-                pickupItemEventManager.Unsubscribe(collision.gameObject);
-                Destroy(collision.gameObject);
-            }
-
+            
+            AddAmmunitionToPistol(ammunitionToAdd);
+            //Destroy and unsubscribe item after is collected
+            pickupItemEventManager.Unsubscribe(collision.gameObject);
+            Destroy(collision.gameObject);
+            //collision.gameObject.SetActive(false);
         }
         else if (collision.gameObject.TryGetComponent(out HealthItem healthItem))
         {
