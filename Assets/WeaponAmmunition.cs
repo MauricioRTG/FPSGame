@@ -28,16 +28,51 @@ public class WeaponAmmunition : MonoBehaviour
 
     public void Reload()
     {
-        ammunitionAmount = remainingAmmunitionStored; //TODO: Add or complete ammunition not reasign
-        remainingAmmunitionStored = 0;
-        //Update ShotgunAmmunitionItem Collider
-        if(TryGetComponent<Pistol>(out Pistol pistol))
+        //Do not reload when the the remainingAmmunitionStored is empty (equal to 0)
+        if(remainingAmmunitionStored <= 0)
         {
-            pickupItemEventManager.NotifySubscribers(pickupItemType.PistolAmmunition);
+            return;
         }
-        else if(TryGetComponent<Shotgun> (out Shotgun shotgun))
+
+        //If the ammunition in magazine is full, do not reload
+        if(ammunitionAmount < MaxAmmunitionAmount)
         {
-            pickupItemEventManager.NotifySubscribers(pickupItemType.ShotgunAmmunition);
+            //Ammunition Amount 2, RemainingAmmunitonStored 10, MaxAmmunition 10
+            //Expected result: Ammunition Amount 10, RemainingAmmunitonStored 2, MaxAmmunition 10
+            int valueToAddToWeaponMagazine = remainingAmmunitionStored - ammunitionAmount; //10-2=8
+            if (valueToAddToWeaponMagazine != remainingAmmunitionStored)
+            {
+                int sum = valueToAddToWeaponMagazine + ammunitionAmount;
+                /*If the sum is greater than the MaxAmmunition calculate the difference again but between
+                 * MaxAmmunitionAmount and ammunitionAmount (this happens when MaxAmmunitionAmountStored is greater than the MaxAmmunitonAmount)*/
+                if (sum > MaxAmmunitionAmount)
+                {
+                    int valueToAddWhenSumIsGreaterThanMaxAmmunitionAmount = MaxAmmunitionAmount - ammunitionAmount;
+                    ammunitionAmount += valueToAddWhenSumIsGreaterThanMaxAmmunitionAmount;
+                    remainingAmmunitionStored = remainingAmmunitionStored - valueToAddWhenSumIsGreaterThanMaxAmmunitionAmount; //
+                }
+                else
+                {
+                    ammunitionAmount += valueToAddToWeaponMagazine;
+                    remainingAmmunitionStored = remainingAmmunitionStored - valueToAddToWeaponMagazine; //10-8=2
+                }  
+            }
+            else
+            {
+                //This happends when the ammunition in the magazine is empty (is equal to 0)
+                ammunitionAmount += remainingAmmunitionStored;
+                remainingAmmunitionStored = 0;
+            }
+
+            //Update ShotgunAmmunitionItems' or PistolAmmunirionItems' Collider
+            if (TryGetComponent<Pistol>(out Pistol pistol))
+            {
+                pickupItemEventManager.NotifySubscribers(pickupItemType.PistolAmmunition);
+            }
+            else if (TryGetComponent<Shotgun>(out Shotgun shotgun))
+            {
+                pickupItemEventManager.NotifySubscribers(pickupItemType.ShotgunAmmunition);
+            }
         }
     }
 
