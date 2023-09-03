@@ -35,7 +35,7 @@ public class RoundManager : MonoBehaviour
         portal = FindObjectOfType<Portal>();
 
         //UI 
-        waveIconGameObjects = GameObject.FindGameObjectsWithTag("WaveIcon");
+        //waveIconGameObjects = GameObject.FindGameObjectsWithTag("WaveIcon");
     }
 
     private void Update()
