@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] int enemyPoints = 50;
     [SerializeField] WaveManager waveManager;
     [SerializeField] DropItem dropItem;
+    [SerializeField] bool enemyDied = false; //Helps avoiding calling the function die multiple times, and that enemy dies only once
 
     // Start is called before the first frame update
     void Start()
@@ -40,8 +41,9 @@ public class Enemy : MonoBehaviour
     {
         currentHealth -= damageAmount;
 
-        if(currentHealth == 0)
+        if(currentHealth <= 0 && !enemyDied)
         {
+            enemyDied = true;
             //Drop a random item or none
             dropItem.DropPickupItem(transform.position);
             Die();
