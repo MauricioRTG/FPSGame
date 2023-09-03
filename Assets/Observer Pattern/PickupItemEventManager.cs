@@ -1,9 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 
 public enum pickupItemType { Health, ShotgunAmmunition, PistolAmmunition};
@@ -68,10 +65,10 @@ public class PickupItemEventManager : MonoBehaviour, ISubject
     {
         yield return new WaitForSeconds(pickupItemDuration);
         Unsubscribe(observer);
-        Debug.Log("Item unsubscribed: " + observer.name);
-        yield return new WaitForSeconds(pickupItemDuration);
+        Debug.Log("Item unsubscribed");
+        //yield return new WaitForSeconds(pickupItemDuration);
         Destroy(observer);
-        Debug.Log("Destroyed: " + observer.name);
+        Debug.Log("Item Destroyed");
     }
 
     public PickupItem ObtainPickupItemType(GameObject pickupItem)

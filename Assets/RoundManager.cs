@@ -35,7 +35,7 @@ public class RoundManager : MonoBehaviour
         portal = FindObjectOfType<Portal>();
 
         //UI 
-        waveIconGameObjects = GameObject.FindGameObjectsWithTag("WaveIcon");
+        //waveIconGameObjects = GameObject.FindGameObjectsWithTag("WaveIcon");
     }
 
     private void Update()
@@ -62,6 +62,7 @@ public class RoundManager : MonoBehaviour
         yield return new WaitForSeconds(waveInterval);
         if (waveCount < maxWavesAmount)
         {
+            waveManager.ResetDestroyedEnemiesCount();
             waveCount++;
             waveManager.StartWave();
         }
