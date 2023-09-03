@@ -10,6 +10,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] int destroyedEnemiesCount;
     [SerializeField] int enemiesDestroyedLimit;
     [SerializeField] int enemiesRemaining;
+    [SerializeField] bool waveEnded = false;
 
     //UI
     [SerializeField] TextMeshProUGUI enemiesRemainingText;
@@ -27,7 +28,7 @@ public class WaveManager : MonoBehaviour
 
         UpdateEnemiesRemainingUI();
         
-        if(destroyedEnemiesCount == enemiesDestroyedLimit)
+        if(destroyedEnemiesCount == enemiesDestroyedLimit && !waveEnded)
         {
             EndWave();
         }
@@ -35,6 +36,8 @@ public class WaveManager : MonoBehaviour
 
     public void StartWave()
     {
+        waveEnded = false;
+
         foreach (GameObject spawnerObject in spawnerObjects)
         {
             if(spawnerObject.TryGetComponent<EnemySpawner>(out var spawner))
@@ -46,6 +49,8 @@ public class WaveManager : MonoBehaviour
 
     public void EndWave()
     {
+        waveEnded = true;
+
         foreach (GameObject spawnerObject in spawnerObjects)
         {
             if (spawnerObject.TryGetComponent<EnemySpawner>(out var spawner))
@@ -53,7 +58,6 @@ public class WaveManager : MonoBehaviour
                 spawner.ToggleSpawning();
             }
         }
-        ResetDestroyedEnemiesCount();
 
         StopCoroutine(roundManager.StartNextWave());
 

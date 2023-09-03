@@ -62,6 +62,7 @@ public class RoundManager : MonoBehaviour
         yield return new WaitForSeconds(waveInterval);
         if (waveCount < maxWavesAmount)
         {
+            waveManager.ResetDestroyedEnemiesCount();
             waveCount++;
             waveManager.StartWave();
         }
