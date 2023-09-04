@@ -50,11 +50,14 @@ public class Player : MonoBehaviour
 
     //Pickup Item Event Manager
     public PickupItemEventManager pickupItemEventManager;
+    public ScoreManager scoreManager;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        scoreManager = FindObjectOfType<ScoreManager>();
+
         health = maxHealth;
         healthImageRectTransform = healthImage.GetComponent<RectTransform>();
 
@@ -145,6 +148,7 @@ public class Player : MonoBehaviour
 
     private void Die()
     {
+        scoreManager.ResetScore();
         RoundManager.RestartRound();
     }
 

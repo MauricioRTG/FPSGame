@@ -6,6 +6,11 @@ public class ScoreManager : MonoBehaviour
 {
     private int scoreValue;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     public int ScoreValue
     {
         get { return scoreValue; }
