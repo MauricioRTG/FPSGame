@@ -4,6 +4,8 @@ Unity
 
 2023
 
+Video: https://youtu.be/U3DPVktF-oc?si=0T5Y6ubxw5XwIZmF
+
 An Arena FPS template game, inspired by game modes such as Call of Duty zombies and the arena from Fable II. With the objective of confronting the waves of enemies each round and rising victorious. Improving my C#, Unity and FPS game-making skills.
 
 ​Contributions: 
