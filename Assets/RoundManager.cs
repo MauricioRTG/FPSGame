@@ -34,15 +34,15 @@ public class RoundManager : MonoBehaviour
 
         portal = FindObjectOfType<Portal>();
 
+        //Update current round UI which was set in inspector
+        roundNumberText.text = currentRound.ToString();
+
         //UI 
         //waveIconGameObjects = GameObject.FindGameObjectsWithTag("WaveIcon");
     }
 
     private void Update()
     {
-        //Update current round UI
-        roundNumberText.text = currentRound.ToString();
-
         //Update current wave UI
         for(int i = 0; i < waveCount; i++)
         {
@@ -53,7 +53,7 @@ public class RoundManager : MonoBehaviour
 
     private void StartRound()
     {
-        currentRound++;
+        //currentRound++;
         StartCoroutine(StartNextWave());
     }
 
